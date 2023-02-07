@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+
+        function changeddl(obj) {
+
+            var text = obj.options[obj.selectedIndex].text;
+            var ddl2 = document.querySelectorAll('#iOperation option');
+            for (var i = 1; i < ddl2.length; i++) {
+                var option = ddl2[i];
+                option.style.display = 'none';
+                if (text == 'Palakkad') {
+                    if (['Mannarkkad', 'Ottappalam','Pattambi'].indexOf(option.text) > -1)
+                        option.style.display = 'block'
+
+                }
+                if (text == 'Kozhikode') {
+                    if (['Mukkam', 'Feroke','Kallayi'].indexOf(option.text) > -1)
+                        option.style.display = 'block'
+                }
+                if (text == 'Malappuram') {
+                    if (['Edappal', 'Kottakal','Valanchery'].indexOf(option.text) > -1)
+                        option.style.display = 'block'
+                }
+                if (text == 'Thrissur') {
+                    if (['Guruvayoor', 'Kunnumkulam','Vadakkekkad'].indexOf(option.text) > -1)
+                        option.style.display = 'block'
+                }if (text == 'Ernakulam') {
+                    if (['Edappally', 'Kallur','Vyttila'].indexOf(option.text) > -1)
+                        option.style.display = 'block'
+                }
+
+
+            }
+        }
+
+    </script>
+    <title>Title</title>
+    <h2>Application Form</h2>
+</head>
+<body style="background-color:#DAEE01">
+<form action="form" method="POST"><br>
+    {% csrf_token %}
+    <table>
+        <tr><td>Name:</td><td><input type="text" name="Name" placeholder="Enter your name" required></td></tr>
+        <tr><td>DOB:</td><td><input type="date" name="Date" placeholder="Enter your name" required></td></tr>
+        <tr><td>Age:</td><td><input type="number" name="Age" placeholder="Enter your age" required></td></tr>
+        <tr><td>Gender:</td><td><input type="radio" name="Gender" value="Male" required>Male
+                                <input type="radio" name="Gender" value="Female" required>Female</td></tr>
+        <tr><td>Phone number:</td><td><input type="text" name="country code"  value="+91" size="2"/>
+                                      <input type="tel" name="phone" maxlength="10" minlength="10" pattern="[0-9]{10}" required/></td></tr>
+        <tr><td>E-mail:</td><td><input type="email" name="Email" placeholder="Enter your email id" required></td></tr>
+        <tr><td>Address:</td><td><textarea cols="40" rows="3" name="Address" value="address" required></textarea></td></tr>
+        <tr><td>District:</td><td><select id="iFunction" name="nFunction" onchange="changeddl(this)" >
+                                              <option value="-1" selected="">__Select Dist__</option>
+                                              <option value="1">Palakkad</option>
+                                              <option value="2">Kozhikode</option>
+                                              <option value="3">Malappuram</option>
+                                              <option value="4">Thrissur</option>
+                                              <option value="5">Ernakulam</option></select></td></tr>
+        <tr><td>Branch:</td><td> <select  id="iOperation" name="nOperation">
+                                  <option value="-1" selected="">__Select Subarea__</option>
+                                   <option value="1_21">Mannarkkad</option>
+                                  <option value="1_22">Ottappalam</option>
+                                  <option value="1_23">Pattambi</option>
+                                    <option value="2_21">Mukkam</option>
+                                     <option value="2_22">Feroke</option>
+                                      <option value="2_23">Kallayi</option>
+                                   <option value="3_21">Kottakal</option>
+                                  <option value="3_22">Edappal</option>
+                                    <option value="3_23">Valanchery</option>
+                                    <option   value="4_21">Guruvayoor</option>
+                                     <option value="4_22">Kunnumkulam</option>
+                                   <option value="4_23">Vadakkekkad</option>
+                                    <option   value="5_21">Edappally</option>
+                                     <option value="5_22">Kallur</option>
+                                      <option value="4_23">Vyttila</option>
+                                  </select></td></tr>
+        <tr><td>Account type:</td><td><select name="Acctype" required>
+                                              <option value="">Select Account</option>
+                                              <option value="Savings Acc">Savings Account</option>
+                                              <option value="Current Acc">Current Account</option>
+                                              <option value="Salary Acc">Salary Account</option>
+                                              <option value="NRI Acc">NRI Account</option></select> </td></tr>
+        <tr><td>Materials Provide:</td><td><input type="checkbox" name="material1" value="Debit Card">Debit Card<br>
+                                  <input type="checkbox" name="material2" value="Credit Card" >Credit Card<br>
+                                  <input type="checkbox" name="material2" value="Pass book">Pass book<br>
+                                  <input type="checkbox" name="material3" value="Cheque book">Cheque book</td></tr>
+        <tr><td><input type="submit" ></td><td><a href="{% url 'logout' %}"><input type="button" value="Logout" /></a></td></tr>
+
+<!--        <tr><td><a href="{% url 'form' %}" class="btn btn-warning">Submit</a></td><td>  <a href="{% url 'home' %}" class="btn btn-warning">Logout</a></td><br></tr>-->
+</table>
+</form>
+{% for msg in messages %}
+<h2>{{msg}}</h2>
+<a href="{% url 'home' %}" class="btn btn-warning">Click here to return to Homepage</a>
+{% endfor %}
+
+</body>
+</html>
