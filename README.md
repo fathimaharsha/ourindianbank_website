@@ -8,4 +8,4 @@ I used MVT architecture as the design pattern. We can register a user, login wit
 <br>
 And obviously, there are features like dropdown, dependent dropdown, checkbox and radiobutton in the form for Application.
 <br><br>
-
+I used XAMPP server to maintain data using phpMyAdmin.It’s used for managing MySQL database.
